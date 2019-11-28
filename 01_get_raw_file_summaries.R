@@ -1,5 +1,6 @@
 # Packages ------------------------------------------------------------------------------------
 
+library(here)
 library(rawDiag)
 library(magrittr)
 library(tictoc)
@@ -10,6 +11,10 @@ library(glue)
 library(RSQLite)
 library(purrr)
 library(furrr)
+library(readr)
+library(writexl)
+library(fs)
+library(ggplot2)
 library(dplyr)
 library(stringr)
 library(tidylog)
@@ -70,7 +75,77 @@ read_tdreport_filenames <- function(tdreport) {
       
       return(output)
       
-   }
+}
+
+make_TIC_ms1 <- function(rawfilename, rawfiledata = NULL) {
+   
+   rawfiledata %>%
+      filter(filename == rawfilename &
+                MSOrder == "Ms") %>%
+      ggplot(aes(x = StartTime, y = TIC)) +
+      geom_line()
+     
+}
+
+make_TIC_ms2 <- function(rawfilename, rawfiledata = NULL) {
+   
+   rawfiledata %>%
+      filter(filename == rawfilename &
+                MSOrder == "Ms2") %>%
+      ggplot(aes(x = StartTime, y = TIC)) +
+      geom_line()
+   
+}
+
+make_BPC_ms1 <- function(rawfilename, rawfiledata = NULL) {
+   
+   rawfiledata %>%
+      filter(filename == rawfilename &
+                MSOrder == "Ms") %>%
+      ggplot(aes(x = StartTime, y = BasePeakIntensity)) +
+      geom_line()
+   
+}
+
+make_BPC_ms2 <- function(rawfilename, rawfiledata = NULL) {
+   
+   rawfiledata %>%
+      filter(filename == rawfilename &
+                MSOrder == "Ms2") %>%
+      ggplot(aes(x = StartTime, y = BasePeakIntensity)) +
+      geom_line()
+   
+}
+
+make_injTime_plot_ms1 <- function(rawfilename, rawfiledata = NULL) {
+   
+   rawfiledata %>%
+      filter(filename == rawfilename &
+                MSOrder == "Ms") %>%
+      ggplot(aes(x = StartTime, y = IonInjectionTimems)) +
+      geom_point()
+   
+}
+
+make_injTime_plot_ms2 <- function(rawfilename, rawfiledata = NULL) {
+   
+   rawfiledata %>%
+      filter(filename == rawfilename &
+                MSOrder == "Ms2") %>%
+      ggplot(aes(x = StartTime, y = IonInjectionTimems)) +
+      geom_point()
+   
+}
+
+make_precursorMass_plot <- function(rawfilename, rawfiledata = NULL) {
+   
+   rawfiledata %>%
+      filter(filename == rawfilename &
+                MSOrder == "Ms2") %>%
+      ggplot(aes(x = StartTime, y = PrecursorMass)) +
+      geom_point()
+   
+}
 
 # Initialize Parameters -----------------------------------------------------------------------
 
@@ -146,13 +221,24 @@ rawFileInfo <-
 
 # Analysis 1 ----------------------------------------------------------------------------------
 
-injectionTimesAnalysis <- 
+basicAnalysis <- 
    rawFileInfo %>%
+   mutate(MSOrder = case_when(MSOrder == "Ms" ~ 1,
+                              MSOrder == "Ms2" ~ 2,
+                              MSOrder == "Ms3" ~ 3,
+                              MSOrder == "Ms4" ~ 4) %>% as.integer) %>% 
    mutate(polarity = if_else(
       str_detect(ScanType, fixed("+")), "pos", "neg")
-      ) %>%
-   group_by(filename, MSOrder, polarity) %>%
-   summarize(acquisitionCount = n(),
+   ) %>%
+   group_by(filename, MSOrder, MassAnalyzer, polarity) %>%
+   summarize(scanHeader = if_else(MSOrder == 1, ScanType, "N/A")[1],
+             FTResolution = FTResolution[1],
+             averageScanTime = mean(ElapsedScanTimesec),
+             stdDevScanTime = sd(ElapsedScanTimesec),
+             acquisitionCount = n(),
+             maxTIC = max(TIC),
+             meanTIC = mean(TIC),
+             stdDevTIC = sd(TIC),
              maxInjectTime = max(IonInjectionTimems),
              maxInjections = 
                 sum(IonInjectionTimems >= maxInjectTime * maxinjectcutoff),
@@ -160,11 +246,50 @@ injectionTimesAnalysis <-
                 (sum(IonInjectionTimems >= maxInjectTime * maxinjectcutoff)/
                     acquisitionCount) * 100)
 
-# rawFileInfo %>%
-#    mutate(polarity = if_else(
-#       str_detect(ScanType, fixed("+")), "pos", "neg")
-#    ) %>%
-#    filter(filename == "DSB-LCA_20191121_M9-M-20190515_PEPPI01B_01.raw" &
-#              MSOrder == "Ms2" & polarity == "pos") %>% 
-#    select(scanNumber, IonInjectionTimems) %>% 
-#    View()
+setwd(here())
+
+if (dir_exists("output/") == FALSE) dir_create("output/")
+
+write_csv(basicAnalysis, "output/raw_file_analysis.csv")
+
+
+# Make Plots --------------------------------------------------------------
+
+TIC_ms1 <- 
+   map(rawFilesInTDreport %>% as.list(),
+       make_TIC_ms1,
+       rawfiledata = rawFileInfo) %>% 
+   set_names(rawFilesInTDreport)
+
+TIC_ms2 <- 
+   map(rawFilesInTDreport %>% as.list(),
+       make_TIC_ms2,
+       rawfiledata = rawFileInfo) %>% 
+   set_names(rawFilesInTDreport)
+
+BPC_ms1 <- 
+   map(rawFilesInTDreport %>% as.list(),
+       make_BPC_ms1,
+       rawfiledata = rawFileInfo) %>% 
+   set_names(rawFilesInTDreport)
+
+BPC_ms2 <- 
+   map(rawFilesInTDreport %>% as.list(),
+       make_BPC_ms2,
+       rawfiledata = rawFileInfo) %>% 
+   set_names(rawFilesInTDreport)
+
+injectionTime_ms1_plot <- 
+   map(rawFilesInTDreport %>% as.list(),
+       make_injTime_plot_ms1,
+       rawfiledata = rawFileInfo) %>% 
+   set_names(rawFilesInTDreport)
+
+injectionTime_ms2_plot <- 
+   map(rawFilesInTDreport %>% as.list(),
+       make_injTime_plot_ms2,
+       rawfiledata = rawFileInfo) %>% 
+   set_names(rawFilesInTDreport)
+
+# TO ADD:
+# Output report
