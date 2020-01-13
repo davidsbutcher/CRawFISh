@@ -1,0 +1,76 @@
+---
+title: "CRawFISh Output Report"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+
+output: 
+  flexdashboard::flex_dashboard:
+    theme: spacelab
+    orientation: columns
+    vertical_layout: scroll
+---
+
+```{r setup, include=FALSE}
+
+library(magrittr)
+library(purrr)
+library(glue)
+library(dplyr)
+library(flexdashboard)
+library(DT)
+library(htmlwidgets)
+library(ggplot2)
+
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Raw File List
+
+This is an automatically generated document containing CRawFISh analysis results for the following .raw files:
+
+```{r}
+
+rawFileList %>%
+   map(basename) %>%
+   set_names(NULL) %>% 
+   pander::pander()
+
+```
+
+## Metadata Summary
+
+```{r echo=FALSE}
+
+basicAnalysis %>% 
+   DT::datatable(
+      extensions = c("FixedColumns", "Buttons"),
+      class = "hover",
+      width = 1300,
+      options = list(autoWidth = TRUE,
+                     pageLength = 8,
+                     lengthMenu = c(8),
+                     pagingType = "full_numbers",
+                     columnDefs = list(list(className = 'dt-center')),
+                     dom = "Bfrtip",
+                     scrollX = TRUE,
+                     fixedColumns = list(leftColumns = 2),
+                     buttons = c("copy", "csv", "excel", "colvis"))
+   ) %>% 
+   formatStyle(1:length(basicAnalysis), fontSize = "9")
+
+```
+
+```{r include=FALSE}
+
+out <- NULL
+
+options(knitr.duplicate.label = 'allow')
+
+for (i in seq_along(rawFileList)) {
+  
+  out <- c(out, knitr::knit_child("03b_generate_report_child.Rmd"))
+  
+}
+
+```
+
+`r paste(knitr::knit_child(text = out), collapse = '')`

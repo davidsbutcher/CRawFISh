@@ -1,0 +1,55 @@
+`r paste('#', basename(rawFileList[[i]]), '{data-navmenu="Raw Filename"}')`
+
+`r shiny::tags$h2(basename(rawFileList[[i]]), style="text-align:center")`
+
+Column {.tabset .tabset-fade}
+-----------------------------------------------------------------------
+
+### Total Ion Chromatograms, MS1
+
+```{r}
+
+   plotly::ggplotly(TIC_ms1[[i]])
+
+```
+
+
+### Total Ion Chromatograms, MS2
+
+```{r}
+
+   plotly::ggplotly(TIC_ms2[[i]])
+
+```
+
+### Base Peak Chromatograms, MS1
+
+```{r}
+
+   plotly::ggplotly(BPC_ms1[[i]])
+
+```
+
+### Base Peak Chromatograms, MS2
+
+```{r}
+
+   plotly::ggplotly(BPC_ms2[[i]])
+
+```
+
+### Injection Times, MS1
+
+```{r}
+
+   plotly::ggplotly(injectionTime_ms1_plot[[i]])
+
+```
+
+### Injection Times, MS2
+
+```{r}
+
+   plotly::ggplotly(injectionTime_ms2_plot[[i]])
+
+```
