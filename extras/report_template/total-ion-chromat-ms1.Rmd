@@ -1,0 +1,9 @@
+#### <font style="font-size: 0.7em"> {{basename(rawFileList[[i]]) %>% str_trunc(50, "left")}} </font>\n\n
+
+{{
+   
+   plotly::ggplotly(TIC_ms1[[i]])
+   
+}}
+
+\n\n

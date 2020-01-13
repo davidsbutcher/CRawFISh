@@ -219,25 +219,3 @@ injectionTime_ms2_plot <-
 set_names(injectionTime_ms2_plot, rawFileList %>% unlist() %>% basename())
 
 message("DONE!\n\n")
-
-plan(multisession(workers = 1))
-
-
-# Output report -----------------------------------------------------------
-
-if (exists("tdReportName") == TRUE & length(tdReportName) == 1) {
-   
-   rmarkdown::render(
-      "03a_generate_report_parent.Rmd",
-      output_file = 
-         glue("output/{path_ext_remove(tdReportName)}_CRawFISh_report.html")
-   )
-   
-} else {
-   
-   rmarkdown::render("03a_generate_report_parent.Rmd",
-                     output_file = glue("output/{systime}_CRawFISh_report.html"))
-   
-}
-
-message(glue("\n\nScript finished, {capture.output(toc())}"))

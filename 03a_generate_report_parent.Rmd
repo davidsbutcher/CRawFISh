@@ -23,7 +23,12 @@ library(ggplot2)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-## Raw File List
+`r paste('#', "SUMMARY", '{data-navmenu="Raw Filename"}')`
+
+Column {.tabset .tabset-fade}
+-----------------------------------------------------------------------
+
+### Raw File List
 
 This is an automatically generated document containing CRawFISh analysis results for the following .raw files:
 
@@ -36,7 +41,7 @@ rawFileList %>%
 
 ```
 
-## Metadata Summary
+### Metadata Summary
 
 ```{r echo=FALSE}
 
@@ -44,10 +49,9 @@ basicAnalysis %>%
    DT::datatable(
       extensions = c("FixedColumns", "Buttons"),
       class = "hover",
-      width = 1300,
       options = list(autoWidth = TRUE,
-                     pageLength = 8,
-                     lengthMenu = c(8),
+                     pageLength = 10,
+                     lengthMenu = c(10),
                      pagingType = "full_numbers",
                      columnDefs = list(list(className = 'dt-center')),
                      dom = "Bfrtip",
