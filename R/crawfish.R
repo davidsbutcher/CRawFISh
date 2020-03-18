@@ -6,6 +6,7 @@
 #' @param tdReportDir Full path to the directory containing the tdReport.
 #' @param tdReportName Name of the tdReport file.
 #' @param maxinjectcutoff Fraction of max injection time that should be used as cutoff for max injections.
+#' @param make_report Boolean value. Create an HTML report in the output directory?
 #' @return
 #' This function saves a table of summary data (.xlsx) and an html report for the relevant raw files to the specified output directory.
 #' @examples
@@ -25,7 +26,8 @@ crawfish <-
       tdReportDir = NULL,
       tdReportName = NULL,
       outputDir = NULL,
-      maxinjectcutoff = 0.99
+      maxinjectcutoff = 0.99,
+      make_report = TRUE
    ) {
 
       # Assertions --------------------------------------------------------------
@@ -271,26 +273,30 @@ crawfish <-
 
       # Knit the Crawfish report ------------------------------------------------
 
-      setwd(
-         paste0(.libPaths(), "/CRawFISh/")
-      )
+      if (make_report == TRUE) {
 
-      if (use_tdreport == TRUE) {
-
-         render(
-            "rmd/generate_report_parent.Rmd",
-            output_file =
-               paste0(outputDir, "/", path_ext_remove(tdReportName), "_CRawFISh_report.html")
+         setwd(
+            paste0(.libPaths(), "/CRawFISh/")
          )
 
-      } else {
+         if (use_tdreport == TRUE) {
 
-         systime <- format(Sys.time(), "%Y%m%d_%H%M%S")
+            render(
+               "rmd/generate_report_parent.Rmd",
+               output_file =
+                  paste0(outputDir, "/", path_ext_remove(tdReportName), "_CRawFISh_report.html")
+            )
 
-         render(
-            "rmd/generate_report_parent.Rmd",
-            output_file = paste0(outputDir, "/", systime, "_CRawFISh_report.html")
-         )
+         } else {
+
+            systime <- format(Sys.time(), "%Y%m%d_%H%M%S")
+
+            render(
+               "rmd/generate_report_parent.Rmd",
+               output_file = paste0(outputDir, "/", systime, "_CRawFISh_report.html")
+            )
+
+         }
 
       }
 
