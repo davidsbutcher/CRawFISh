@@ -43,3 +43,5 @@ output/
 .Rproj.user
 
 deprecated/
+
+README.Rmd
