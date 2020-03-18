@@ -46,20 +46,22 @@ rawFileList %>%
 ```{r echo=FALSE}
 
 basicAnalysis %>% 
-   DT::datatable(
-      extensions = c("FixedColumns", "Buttons"),
-      class = "hover",
-      options = list(autoWidth = TRUE,
-                     pageLength = 10,
-                     lengthMenu = c(10),
-                     pagingType = "full_numbers",
-                     columnDefs = list(list(className = 'dt-center')),
-                     dom = "Bfrtip",
-                     scrollX = TRUE,
-                     fixedColumns = list(leftColumns = 2),
-                     buttons = c("copy", "csv", "excel", "colvis"))
-   ) %>% 
-   formatStyle(1:length(basicAnalysis), fontSize = "9")
+  DT::datatable(
+    extensions = c("FixedColumns", "Buttons"),
+    class = "hover",
+    options = list
+    (autoWidth = TRUE,
+      pageLength = 10,
+      lengthMenu = c(10),
+      pagingType = "full_numbers",
+      columnDefs = list(list(className = 'dt-center')),
+      dom = "Bfrtip",
+      scrollX = TRUE,
+      fixedColumns = list(leftColumns = 2),
+      buttons = c("copy", "csv", "excel", "colvis")
+    )
+  ) %>% 
+  formatStyle(1:length(basicAnalysis), fontSize = "9")
 
 ```
 

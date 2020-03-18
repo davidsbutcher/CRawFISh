@@ -80,7 +80,7 @@ toprow <-
 addStyle(xl_workbook, 1, toprow,
          rows = 1, cols = 1:length(basicAnalysis))
 
-if (exists("tdReportName") == TRUE & length(tdReportName) == 1) {
+if (use_tdreport == TRUE) {
    
    saveWorkbook(
       xl_workbook,
@@ -210,12 +210,22 @@ injectionTime_ms1_plot <-
 set_names(injectionTime_ms1_plot, rawFileList %>% unlist() %>% basename())
 
 injectionTime_ms2_plot <- 
-   future_map(rawFileList %>% map(basename),
-              make_injTime_plot_ms2,
-              rawfiledata = rawFileInfo,
-              plot_theme = scatterPlotTheme,
-              .progress = TRUE)
+   future_map(
+      rawFileList %>% map(basename),
+      make_injTime_plot_ms2,
+      rawfiledata = rawFileInfo,
+      plot_theme = scatterPlotTheme,
+      .progress = TRUE
+   )
 
 set_names(injectionTime_ms2_plot, rawFileList %>% unlist() %>% basename())
 
 message("DONE!\n\n")
+
+
+
+# make_BPC_ms2(
+#    rawFileList[[4]] %>% basename(),
+#    rawfiledata = rawFileInfo,
+#    plot_theme = BPCtheme
+# )

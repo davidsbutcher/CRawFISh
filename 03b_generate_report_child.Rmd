@@ -5,11 +5,28 @@
 Column {.tabset .tabset-fade}
 -----------------------------------------------------------------------
 
+```{r include=FALSE}
+
+safeggplotly <- purrr::safely(plotly::ggplotly)
+
+```
+
 ### Total Ion Chromatograms, MS1
 
-```{r}
+```{r echo=FALSE}
 
+temp_ggplotly <- 
+   safeggplotly(TIC_ms1[[i]])
+
+if (is.null(temp_ggplotly[["result"]]) == FALSE) {
+   
    plotly::ggplotly(TIC_ms1[[i]])
+   
+} else {
+   
+   pander::pander("GGPLOTLY ERROR")
+
+}
 
 ```
 
@@ -18,7 +35,18 @@ Column {.tabset .tabset-fade}
 
 ```{r}
 
+temp_ggplotly <- 
+   safeggplotly(TIC_ms2[[i]])
+
+if (is.null(temp_ggplotly[["result"]]) == FALSE) {
+   
    plotly::ggplotly(TIC_ms2[[i]])
+   
+} else {
+   
+   pander::pander("GGPLOTLY ERROR")
+
+}
 
 ```
 
@@ -26,7 +54,18 @@ Column {.tabset .tabset-fade}
 
 ```{r}
 
+temp_ggplotly <- 
+   safeggplotly(BPC_ms1[[i]])
+
+if (is.null(temp_ggplotly[["result"]]) == FALSE) {
+   
    plotly::ggplotly(BPC_ms1[[i]])
+   
+} else {
+   
+   pander::pander("GGPLOTLY ERROR")
+
+}
 
 ```
 
@@ -34,15 +73,37 @@ Column {.tabset .tabset-fade}
 
 ```{r}
 
-   plotly::ggplotly(BPC_ms2[[i]])
+temp_ggplotly <- 
+   safeggplotly(BPC_ms2[[i]])
 
+if (is.null(temp_ggplotly[["result"]]) == FALSE) {
+   
+   plotly::ggplotly(BPC_ms2[[i]])
+   
+} else {
+   
+   pander::pander("GGPLOTLY ERROR")
+
+}
+   
 ```
 
 ### Injection Times, MS1
 
 ```{r}
 
+temp_ggplotly <- 
+   safeggplotly(injectionTime_ms1_plot[[i]])
+
+if (is.null(temp_ggplotly[["result"]]) == FALSE) {
+   
    plotly::ggplotly(injectionTime_ms1_plot[[i]])
+   
+} else {
+   
+   pander::pander("GGPLOTLY ERROR")
+
+}
 
 ```
 
@@ -50,6 +111,17 @@ Column {.tabset .tabset-fade}
 
 ```{r}
 
+temp_ggplotly <- 
+   safeggplotly(injectionTime_ms2_plot[[i]])
+
+if (is.null(temp_ggplotly[["result"]]) == FALSE) {
+   
    plotly::ggplotly(injectionTime_ms2_plot[[i]])
+   
+} else {
+   
+   pander::pander("GGPLOTLY ERROR")
+
+}
 
 ```

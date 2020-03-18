@@ -23,7 +23,7 @@ library(dplyr)
 
 # Search tdreport?
 
-use_tdreport <- TRUE
+use_tdreport <- F
 
 # TDReport Directory
 
@@ -38,7 +38,8 @@ tdReportName <-
 # Raw File Directory
 
 rawFileDir <- 
-   "Z:/ICR/David Butcher/21T data/"
+   "Z:/ICR/David Butcher/21T data/20200202_EcoliMG1655_WCL_columnheater/60C"
+
 
 # Percentage of max injection time to use for determination
 # of max injects. 99% recommended
@@ -70,7 +71,7 @@ source("02_analyze_raw_file_info.R")
 
 # Output report -----------------------------------------------------------
 
-if (exists("tdReportName") == TRUE & length(tdReportName) == 1) {
+if (use_tdreport == TRUE) {
    
    rmarkdown::render(
       "03a_generate_report_parent.Rmd",
@@ -80,8 +81,10 @@ if (exists("tdReportName") == TRUE & length(tdReportName) == 1) {
    
 } else {
    
-   rmarkdown::render("03a_generate_report_parent.Rmd",
-                     output_file = glue("output/{systime}_CRawFISh_report.html"))
+   rmarkdown::render(
+      "03a_generate_report_parent.Rmd",
+      output_file = glue("output/{systime}_CRawFISh_report.html")
+   )
    
 }
 
