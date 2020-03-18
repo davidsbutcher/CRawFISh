@@ -1,0 +1,14 @@
+Package: CRawFISh
+Title: Create summary info from a tdReport or directory of Thermo Raw files.
+Version: 0.0.666
+Authors@R: 
+    person(given = "David",
+           family = "Butcher",
+           role = c("aut", "cre"),
+           email = "drdavidbutcher@gmail.com",
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: Save a table of summary data (.xlsx) and an html report for the relevant raw files to the specified output directory.
+License: Fishing
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.0.2

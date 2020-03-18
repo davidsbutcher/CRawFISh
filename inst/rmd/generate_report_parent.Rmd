@@ -45,7 +45,7 @@ rawFileList %>%
 
 ```{r echo=FALSE}
 
-basicAnalysis %>% 
+rawFileInfoSum %>% 
   DT::datatable(
     extensions = c("FixedColumns", "Buttons"),
     class = "hover",
@@ -61,7 +61,7 @@ basicAnalysis %>%
       buttons = c("copy", "csv", "excel", "colvis")
     )
   ) %>% 
-  formatStyle(1:length(basicAnalysis), fontSize = "9")
+  formatStyle(1:length(rawFileInfoSum), fontSize = "9")
 
 ```
 
@@ -73,7 +73,7 @@ options(knitr.duplicate.label = 'allow')
 
 for (i in seq_along(rawFileList)) {
   
-  out <- c(out, knitr::knit_child("03b_generate_report_child.Rmd"))
+  out <- c(out, knitr::knit_child("generate_report_child.Rmd"))
   
 }
 

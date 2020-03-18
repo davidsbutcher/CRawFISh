@@ -40,3 +40,6 @@ rsconnect/
 20191121_EcoliMG1655_PEPPI_M9-M-20190515_F01-09_2run_CAMsearch_B.tdReport
 
 output/
+.Rproj.user
+
+deprecated/
