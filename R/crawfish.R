@@ -12,8 +12,6 @@
 #' @examples
 #' IOU some examples. -David
 #' @import assertthat
-#' @import tictoc
-#' @import here
 #' @import ggplot2
 #' @importFrom fs path_ext_remove
 #' @importFrom rmarkdown render
