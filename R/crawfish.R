@@ -13,6 +13,7 @@
 #' IOU some examples. -David
 #' @import assertthat
 #' @import ggplot2
+#' @import tictoc
 #' @importFrom fs path_ext_remove
 #' @importFrom rmarkdown render
 #' @importFrom rlang set_names
@@ -302,6 +303,5 @@ crawfish <-
       message(
          paste0("\n\nCrawfish finished, ", capture.output(toc()))
       )
-      toc()
 
    }

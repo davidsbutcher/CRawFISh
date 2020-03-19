@@ -86,8 +86,6 @@ analyze_raw_file_info <-
          ungroup() %>%
          mutate(MassAnalyzer = str_remove(MassAnalyzer, fixed("MassAnalyzer")))
 
-      setwd(here())
-
       message("Done summarizing raw file info\n\n")
 
       return(basicAnalysis)
