@@ -38,7 +38,7 @@ save_raw_file_info_sum <-
 
       rawFileInfoSum <-
          rawFileInfoSum %>%
-         mutate_at(c(14,15,17,18,19,21,22,24), = ~format(., scientific = 4, digits = 4, nsmall = 3))
+         mutate_at(c(14,15,17,18,19,21,22,24), ~format(., scientific = 4, digits = 4, nsmall = 3))
 
       ## Make Excel workbook
 
