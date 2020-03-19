@@ -15,7 +15,7 @@
 #' @import ggplot2
 #' @importFrom fs path_ext_remove
 #' @importFrom rmarkdown render
-#' @importFrom purrr set_names
+#' @importFrom rlang set_names
 #' @export
 
 crawfish <-
