@@ -10,6 +10,7 @@
 #' @examples
 #' Fix this later
 #' @importFrom magrittr %>%
+#' @importFrom dplyr mutate_at
 #' @importFrom fs dir_exists
 #' @importFrom fs dir_create
 #' @importFrom fs path_ext_remove
