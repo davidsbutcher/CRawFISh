@@ -200,80 +200,80 @@ crawfish <-
 
       # Make Plots --------------------------------------------------------------
 
-      rawFileList <-
-         get_raw_file_list(
-            rawFileDir = rawFileDir,
-            tdReportDir = tdReportDir,
-            tdReportName = tdReportName,
-            use_tdreport = use_tdreport
-         )
-
-      message("\n\nCreating plots from .raw file summary...\n")
-
-      TIC_ms1 <-
-         map(
-            rawFileList %>% map(basename),
-            make_TIC_ms1,
-            rawfiledata = rawFileInfo,
-            plot_theme = TICtheme
-         )
-
-      set_names(TIC_ms1, rawFileList %>% unlist() %>% basename())
-
-      TIC_ms2 <-
-         map(
-            rawFileList %>% map(basename),
-            make_TIC_ms2,
-            rawfiledata = rawFileInfo,
-            plot_theme = TICtheme
-         )
-
-      set_names(TIC_ms2, rawFileList %>% unlist() %>% basename())
-
-      BPC_ms1 <-
-         map(
-            rawFileList %>% map(basename),
-            make_BPC_ms1,
-            rawfiledata = rawFileInfo,
-            plot_theme = BPCtheme
-         )
-
-      set_names(BPC_ms1, rawFileList %>% unlist() %>% basename())
-
-      BPC_ms2 <-
-         map(
-            rawFileList %>% map(basename),
-            make_BPC_ms2,
-            rawfiledata = rawFileInfo,
-            plot_theme = BPCtheme
-         )
-
-      set_names(BPC_ms2, rawFileList %>% unlist() %>% basename())
-
-      injectionTime_ms1_plot <-
-         map(
-            rawFileList %>% map(basename),
-            make_injTime_plot_ms1,
-            rawfiledata = rawFileInfo,
-            plot_theme = scatterPlotTheme
-         )
-
-      set_names(injectionTime_ms1_plot, rawFileList %>% unlist() %>% basename())
-
-      injectionTime_ms2_plot <-
-         map(
-            rawFileList %>% map(basename),
-            make_injTime_plot_ms2,
-            rawfiledata = rawFileInfo,
-            plot_theme = scatterPlotTheme
-         )
-
-      set_names(injectionTime_ms2_plot, rawFileList %>% unlist() %>% basename())
-
-
-      # Knit the Crawfish report ------------------------------------------------
-
       if (make_report == TRUE) {
+
+         rawFileList <-
+            get_raw_file_list(
+               rawFileDir = rawFileDir,
+               tdReportDir = tdReportDir,
+               tdReportName = tdReportName,
+               use_tdreport = use_tdreport
+            )
+
+         message("\n\nCreating plots from .raw file summary...\n")
+
+         TIC_ms1 <-
+            map(
+               rawFileList %>% map(basename),
+               make_TIC_ms1,
+               rawfiledata = rawFileInfo,
+               plot_theme = TICtheme
+            )
+
+         set_names(TIC_ms1, rawFileList %>% unlist() %>% basename())
+
+         TIC_ms2 <-
+            map(
+               rawFileList %>% map(basename),
+               make_TIC_ms2,
+               rawfiledata = rawFileInfo,
+               plot_theme = TICtheme
+            )
+
+         set_names(TIC_ms2, rawFileList %>% unlist() %>% basename())
+
+         BPC_ms1 <-
+            map(
+               rawFileList %>% map(basename),
+               make_BPC_ms1,
+               rawfiledata = rawFileInfo,
+               plot_theme = BPCtheme
+            )
+
+         set_names(BPC_ms1, rawFileList %>% unlist() %>% basename())
+
+         BPC_ms2 <-
+            map(
+               rawFileList %>% map(basename),
+               make_BPC_ms2,
+               rawfiledata = rawFileInfo,
+               plot_theme = BPCtheme
+            )
+
+         set_names(BPC_ms2, rawFileList %>% unlist() %>% basename())
+
+         injectionTime_ms1_plot <-
+            map(
+               rawFileList %>% map(basename),
+               make_injTime_plot_ms1,
+               rawfiledata = rawFileInfo,
+               plot_theme = scatterPlotTheme
+            )
+
+         set_names(injectionTime_ms1_plot, rawFileList %>% unlist() %>% basename())
+
+         injectionTime_ms2_plot <-
+            map(
+               rawFileList %>% map(basename),
+               make_injTime_plot_ms2,
+               rawfiledata = rawFileInfo,
+               plot_theme = scatterPlotTheme
+            )
+
+         set_names(injectionTime_ms2_plot, rawFileList %>% unlist() %>% basename())
+
+
+         # Knit the Crawfish report ------------------------------------------------
 
          setwd(
             paste0(.libPaths(), "/CRawFISh/")
