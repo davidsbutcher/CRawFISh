@@ -109,8 +109,7 @@ get_raw_file_info_TDReport <-
                map(
                   rawFileList,
                   read.raw,
-                  rawDiag = FALSE,
-                  .progress = TRUE
+                  rawDiag = FALSE
                )
             )
          ) %>%

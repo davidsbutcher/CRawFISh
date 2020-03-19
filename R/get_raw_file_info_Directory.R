@@ -53,8 +53,7 @@ get_raw_file_info_Directory <-
                map(
                   rawFileList,
                   read.raw,
-                  rawDiag = FALSE,
-                  .progress = TRUE
+                  rawDiag = FALSE
                )
             )
          ) %>%
