@@ -16,7 +16,6 @@
 #' @importFrom purrr map_chr
 #' @importFrom purrr as_vector
 #' @importFrom purrr reduce
-#' @importFrom furrr future_map
 #' @importFrom stringr str_detect
 #' @importFrom stringr str_subset
 #' @importFrom dplyr union_all
@@ -61,7 +60,7 @@ get_raw_file_info_TDReport <-
 
       rawFilesInTDreport <-
          tdReportList %>%
-         future_map(read_tdreport_filenames) %>%
+         map(read_tdreport_filenames) %>%
          reduce(unlist)
 
       rawFilesInTDreportList <-
@@ -107,7 +106,7 @@ get_raw_file_info_TDReport <-
       rawFileInfo <-
          suppressMessages(
             suppressWarnings(
-               future_map(
+               map(
                   rawFileList,
                   read.raw,
                   rawDiag = FALSE,

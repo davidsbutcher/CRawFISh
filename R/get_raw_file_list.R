@@ -12,7 +12,6 @@
 #' @importFrom purrr map_chr
 #' @importFrom stringr str_subset
 #' @importFrom purrr reduce
-#' @importFrom furrr future_map
 #' @return
 #' List containing full paths of raw files
 #' @examples
@@ -58,7 +57,7 @@ get_raw_file_list <-
 
          rawFilesInTDreport <-
             tdReportList %>%
-            future_map(read_tdreport_filenames) %>%
+            map(read_tdreport_filenames) %>%
             reduce(unlist)
 
          rawFilesInTDreportList <-
