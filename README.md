@@ -8,7 +8,7 @@ Make a statistical summary sheet for any number of Thermo Raw files
 Install from GitHub:
 
 ``` r
-remotes::install_github(davidsbutcher/crawfish)
+remotes::install_github("davidsbutcher/crawfish")
 ```
 
 ## Usage
