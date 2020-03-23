@@ -275,14 +275,17 @@ crawfish <-
 
          # Knit the Crawfish report ------------------------------------------------
 
-         setwd(
-            paste0(.libPaths(), "/CRawFISh/")
-         )
+         rmdPath <-
+            system.file(
+               "rmd",
+               "generate_report_parent.Rmd",
+               package = "CRawFISh"
+            )
 
          if (use_tdreport == TRUE) {
 
             render(
-               "rmd/generate_report_parent.Rmd",
+               rmdPath,
                output_file =
                   paste0(outputDir, "/", path_ext_remove(tdReportName), "_CRawFISh_report.html")
             )
@@ -292,7 +295,7 @@ crawfish <-
             systime <- format(Sys.time(), "%Y%m%d_%H%M%S")
 
             render(
-               "rmd/generate_report_parent.Rmd",
+               rmdPath,
                output_file = paste0(outputDir, "/", systime, "_CRawFISh_report.html")
             )
 
@@ -301,7 +304,7 @@ crawfish <-
       }
 
       message(
-         paste0("\n\nCrawfish finished, ", capture.output(toc()))
+         paste0("\n\nCRawFISh finished, ", capture.output(toc()))
       )
 
    }

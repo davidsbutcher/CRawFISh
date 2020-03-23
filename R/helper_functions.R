@@ -219,3 +219,24 @@ make_precursorMass_plot <- function(rawfilename, rawfiledata = NULL, plot_theme 
 
 }
 
+#' Make Precursor Mass Heatmap
+#' @param rawfilename String containing the name of a single raw file.
+#' @param rawfiledata A dataframe containing data extracted from the corresponding raw file.
+#' @param plot_theme Optional list of ggplot protos to add to plots.
+#' @importFrom magrittr %>%
+#' @importFrom dplyr filter
+#' @importFrom ggplot2 ggplot
+#' @importFrom ggplot2 geom_line
+#' @importFrom ggplot2 aes
+
+make_precursorMass_heatmap <- function(rawfilename, rawfiledata = NULL, plot_theme = NULL) {
+
+   rawfiledata %>%
+      filter(filename == rawfilename & MSOrder == "Ms2") %>%
+      ggplot(aes(x = StartTime, y = PrecursorMass)) +
+      geom_point() +
+      plot_theme
+
+}
+
+

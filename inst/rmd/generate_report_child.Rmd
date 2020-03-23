@@ -21,12 +21,26 @@ temp_ggplotly <-
 if (is.null(temp_ggplotly[["result"]]) == FALSE) {
    
    suppressWarnings(
-      plotly::ggplotly(TIC_ms1[[i]])
+      plotly::ggplotly(TIC_ms1[[i]]) %>% 
+         plotly::style(
+            line = list(
+               width = 1, 
+               color = "black"
+            )
+         ) %>% 
+         plotly::config(
+            displaylogo = FALSE,
+            toImageButtonOptions = list(
+               format = "svg",
+               width = 800,
+               height = 500
+            )
+         ) 
    )
    
 } else {
    
-   pander::pander("GGPLOTLY ERROR")
+   pander::pander("Error while creating plotly graph")
    
 }
 
@@ -43,12 +57,26 @@ temp_ggplotly <-
 if (is.null(temp_ggplotly[["result"]]) == FALSE) {
    
    suppressWarnings(
-      plotly::ggplotly(TIC_ms2[[i]])
+      plotly::ggplotly(TIC_ms2[[i]]) %>% 
+         plotly::style(
+            line = list(
+               width = 1, 
+               color = "black"
+            )
+         ) %>% 
+         plotly::config(
+            displaylogo = FALSE,
+            toImageButtonOptions = list(
+               format = "svg",
+               width = 800,
+               height = 500
+            )
+         ) 
    )
    
 } else {
    
-   pander::pander("GGPLOTLY ERROR")
+   pander::pander("Error while creating plotly graph")
    
 }
 
@@ -64,12 +92,26 @@ temp_ggplotly <-
 if (is.null(temp_ggplotly[["result"]]) == FALSE) {
    
    suppressWarnings(
-      plotly::ggplotly(BPC_ms1[[i]])
+      plotly::ggplotly(BPC_ms1[[i]]) %>% 
+         plotly::style(
+            line = list(
+               width = 1, 
+               color = "black"
+            )
+         ) %>% 
+         plotly::config(
+            displaylogo = FALSE,
+            toImageButtonOptions = list(
+               format = "svg",
+               width = 800,
+               height = 500
+            )
+         ) 
    )
    
 } else {
    
-   pander::pander("GGPLOTLY ERROR")
+   pander::pander("Error while creating plotly graph")
    
 }
 
@@ -85,12 +127,27 @@ temp_ggplotly <-
 if (is.null(temp_ggplotly[["result"]]) == FALSE) {
    
    suppressWarnings(
-      plotly::ggplotly(BPC_ms2[[i]])
+      plotly::ggplotly(BPC_ms2[[i]]) %>% 
+         plotly::style(
+            line = list(
+               width = 1, 
+               color = "black"
+            )
+         ) %>% 
+         plotly::config(
+            displaylogo = FALSE,
+            toImageButtonOptions = list(
+               format = "svg",
+               width = 800,
+               height = 500
+            )
+         ) 
    )
+   
    
 } else {
    
-   pander::pander("GGPLOTLY ERROR")
+   pander::pander("Error while creating plotly graph")
    
 }
 
@@ -106,12 +163,27 @@ temp_ggplotly <-
 if (is.null(temp_ggplotly[["result"]]) == FALSE) {
    
    suppressWarnings(
-      plotly::ggplotly(injectionTime_ms1_plot[[i]])
+      plotly::ggplotly(injectionTime_ms1_plot[[i]]) %>% 
+         plotly::style(
+            line = list(
+               width = 1, 
+               color = "black"
+            )
+         ) %>% 
+         plotly::config(
+            displaylogo = FALSE,
+            toImageButtonOptions = list(
+               format = "svg",
+               width = 800,
+               height = 500
+            )
+         ) 
    )
+   
    
 } else {
    
-   pander::pander("GGPLOTLY ERROR")
+   pander::pander("Error while creating plotly graph")
    
 }
 
@@ -127,12 +199,26 @@ temp_ggplotly <-
 if (is.null(temp_ggplotly[["result"]]) == FALSE) {
    
    suppressWarnings(
-      plotly::ggplotly(injectionTime_ms2_plot[[i]])
+      plotly::ggplotly(injectionTime_ms2_plot[[i]]) %>% 
+         plotly::style(
+            line = list(
+               width = 1, 
+               color = "black"
+            )
+         ) %>% 
+         plotly::config(
+            displaylogo = FALSE,
+            toImageButtonOptions = list(
+               format = "svg",
+               width = 800,
+               height = 500
+            )
+         ) 
    )
    
 } else {
    
-   pander::pander("GGPLOTLY ERROR")
+   pander::pander("Error while creating plotly graph")
    
 }
 
