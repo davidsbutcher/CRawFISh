@@ -100,8 +100,23 @@ get_raw_file_info_TDReport <-
          ) %>%
          as.list()
 
-      message("\n\nReading .raw files\n")
+      ## Check for duplicate files
 
+      if (any(length(rawFileList) > 1)) {
+
+         message("\nRaw files from TDReport found in multiple locations. Using first location found\n")
+
+         rawFileList <-
+            rawFileList %>%
+            map(
+               ~(magrittr::extract2(.x, 1))
+            )
+
+      }
+
+      ## Read raw files
+
+      message("\n\nReading .raw files\n")
 
       rawFileInfo <-
          suppressMessages(

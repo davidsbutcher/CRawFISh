@@ -174,14 +174,14 @@ crawfish <-
 
       scatterPlotTheme <-
          list(
-            geom_label(
-               data = ~filter(.x, IonInjectionTimems == max(IonInjectionTimems)),
-               aes(
-                  x = StartTime, y = IonInjectionTimems,
-                  label = paste0("Max InjTime: ", IonInjectionTimems)
-               ),
-               nudge_x = 25
-            ),
+            # geom_label(
+            #    data = ~filter(.x, IonInjectionTimems == max(IonInjectionTimems)),
+            #    aes(
+            #       x = StartTime, y = IonInjectionTimems,
+            #       label = paste0("Max InjTime: ", IonInjectionTimems)
+            #    ),
+            #    nudge_x = 25
+            # ),
             ggthemes::theme_clean(),
             theme(
                text = element_text(size = 16, family = "Arial"),
@@ -219,6 +219,14 @@ crawfish <-
                rawfiledata = rawFileInfo,
                plot_theme = TICtheme
             )
+
+         message(
+            length(TIC_ms1)
+         )
+
+         message(
+            length(rawFileList)
+         )
 
          set_names(TIC_ms1, rawFileList %>% unlist() %>% basename())
 

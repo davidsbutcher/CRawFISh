@@ -119,6 +119,20 @@ get_raw_file_list <-
 
       }
 
+      ## Check for duplicate files
+
+      if (any(length(rawFileList) > 1)) {
+
+         message("\nRaw files from TDReport found in multiple locations. Using first location found\n")
+
+         rawFileList <-
+            rawFileList %>%
+            map(
+               ~(magrittr::extract2(.x, 1))
+            )
+
+      }
+
       return(rawFileList)
 
    }

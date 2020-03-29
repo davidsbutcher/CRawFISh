@@ -4,7 +4,7 @@ date: "`r format(Sys.time(), '%B %d, %Y')`"
 
 output: 
   flexdashboard::flex_dashboard:
-    theme: spacelab
+    css: ../css/maglab_theme.css
     orientation: columns
     vertical_layout: scroll
 ---
@@ -25,7 +25,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 `r paste('#', "SUMMARY", '{data-navmenu="Raw Filename"}')`
 
-Column {.tabset .tabset-fade}
+Column {.tabset .tabset-fade data-height=800}
 -----------------------------------------------------------------------
 
 ### Raw File List
@@ -35,29 +35,48 @@ This is an automatically generated document containing CRawFISh analysis results
 ```{r}
 
 rawFileList %>%
-   map(basename) %>%
-   set_names(NULL) %>% 
-   pander::pander()
+  map(basename) %>%
+  set_names(NULL) %>% 
+  pander::pander()
 
 ```
 
 ### Metadata Summary
 
+NOTE: Multiple columns are hidden by default, click "Column Visibility" to view them.
+
 ```{r echo=FALSE}
 
 rawFileInfoSum %>% 
   dplyr::mutate_at(c(14,15,17,18,19,21,22,24), ~format(., scientific = 4, digits = 4, nsmall = 3)) %>%
+  dplyr::rename(
+    "Filename" = filename,
+    "Scan Segment" = ScanSegment,
+    "Scan Event" = ScanEvent,
+    "Polarity" = polarity,
+    "MS Order" = MSOrder,
+    "Analyzer" = MassAnalyzer,
+    "Scan Header" = scanHeader,
+    "FT Resolution" = FTResolution
+  ) %>% 
   DT::datatable(
-    extensions = c("FixedColumns", "Buttons"),
+    extensions = c("FixedColumns", "Buttons", "Scroller"),
     class = "hover",
-    options = list
-    (autoWidth = TRUE,
-      pageLength = 10,
-      lengthMenu = c(10),
-      pagingType = "full_numbers",
-      columnDefs = list(list(className = 'dt-center')),
-      dom = "Bfrtip",
+    options = list(
+      deferRender = TRUE,
+      scrollY = 600,
       scrollX = TRUE,
+      scroller = TRUE,
+      columnDefs = list(
+        list(
+          visible = FALSE,
+          targets = c(9:length(rawFileInfoSum))
+        ),
+        list(
+          className = 'dt-center'
+        )
+      ),
+      dom = "Bfrtip",
       fixedColumns = list(leftColumns = 2),
       buttons = c("copy", "csv", "excel", "colvis")
     )

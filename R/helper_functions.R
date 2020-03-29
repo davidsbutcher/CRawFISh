@@ -65,7 +65,7 @@ read_tdreport_filenames <- function(tdreport) {
 
    dbDisconnect(con)
 
-   message("read_tdreport_filenames finished")
+   message("\nread_tdreport_filenames finished")
 
    return(output)
 
