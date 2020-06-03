@@ -64,6 +64,10 @@ For all analyses, the following arguments can be specified:
   - make\_report: Boolean value (TRUE or FALSE). Determines whether an
     HTML report is generated in the `outputDir`. Defaults to TRUE.
 
+  - export\_raw\_info: Boolean value (TRUE or FALSE). Controls whether
+    an outut file is generated containing all extracted metadata without
+    summarization. This file can be quite large. Defaults to FALSE.
+
 ## Dependencies
 
 This package imports `assertthat`, `ggplot2`, `rawDiag` and selected
