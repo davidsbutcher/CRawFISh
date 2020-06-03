@@ -1,6 +1,6 @@
 Package: CRawFISh
 Title: Create summary info from a tdReport or directory of Thermo Raw files.
-Version: 0.0.666
+Version: 0.0.7
 Authors@R: 
     person(given = "David",
            family = "Butcher",
