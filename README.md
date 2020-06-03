@@ -65,8 +65,9 @@ For all analyses, the following arguments can be specified:
     HTML report is generated in the `outputDir`. Defaults to TRUE.
 
   - export\_raw\_info: Boolean value (TRUE or FALSE). Controls whether
-    an outut file is generated containing all extracted metadata without
-    summarization. This file can be quite large. Defaults to FALSE.
+    an output file is generated containing all extracted metadata
+    without summarization. This file can be quite large. Defaults to
+    FALSE.
 
 ## Dependencies
 
