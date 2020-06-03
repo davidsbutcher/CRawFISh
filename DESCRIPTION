@@ -6,9 +6,9 @@ Authors@R:
            family = "Butcher",
            role = c("aut", "cre"),
            email = "drdavidbutcher@gmail.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+           comment = c(ORCID = "0000-0002-1268-4150"))
 Description: Save a table of summary data (.xlsx) and an html report for the relevant raw files to the specified output directory.
-License: Fishing
+License: CC BY-NC 4.0
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0

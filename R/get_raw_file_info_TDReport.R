@@ -129,7 +129,42 @@ get_raw_file_info_TDReport <-
             )
          ) %>%
          map(as_tibble) %>%
-         reduce(union_all)
+         reduce(union_all) %>%
+         mutate(
+            MSOrder = case_when(
+               MSOrder == "Ms" ~ 1,
+               MSOrder == "Ms2" ~ 2,
+               MSOrder == "Ms3" ~ 3,
+               MSOrder == "Ms4" ~ 4
+            ) %>% as.integer
+         ) %>%
+         mutate(
+            polarity = if_else(
+               str_detect(ScanType, fixed("+")), "pos", "neg"
+            )
+         ) %>%
+         mutate(
+            CtrapFill = if_else(
+               str_detect(
+                  FTAnalyzerMessage, fixed("CTrap=")
+               ),
+               str_extract(
+                  FTAnalyzerMessage, "(?<=CTrap=)\\d{1,2}"
+               ),
+               "1"
+            ) %>% as.integer()
+         ) %>%
+         mutate(
+            Ufill = if_else(
+               str_detect(
+                  FTAnalyzerMessage, fixed("Ufill=")
+               ),
+               str_extract(
+                  FTAnalyzerMessage, "(?<=Ufill=)0\\.\\d{1,3}"
+               ),
+               "1"
+            ) %>% as.double()
+         )
 
       message("DONE reading .raw files!\n\n")
 

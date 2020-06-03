@@ -1,7 +1,10 @@
 CRawFISh
 ================
 
-Make a statistical summary sheet for any number of Thermo Raw files
+Make a statistical summary sheet for any number of Thermo raw files.
+This package utilizes the program
+[rawDiag](http://dx.doi.org/10.1021/acs.jproteome.8b00173) to extract
+data from raw files.
 
 ## Installation
 

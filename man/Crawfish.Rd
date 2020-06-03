@@ -11,7 +11,8 @@ crawfish(
   tdReportName = NULL,
   outputDir = NULL,
   maxinjectcutoff = 0.99,
-  make_report = TRUE
+  make_report = TRUE,
+  export_raw_info = FALSE
 )
 }
 \arguments{
@@ -26,6 +27,8 @@ crawfish(
 \item{maxinjectcutoff}{Fraction of max injection time that should be used as cutoff for max injections.}
 
 \item{make_report}{Boolean value. Create an HTML report in the output directory?}
+
+\item{export_raw_info}{Boolean value. Export all info obtained from raw files?}
 }
 \value{
 This function saves a table of summary data (.xlsx) and an html report for the relevant raw files to the specified output directory.

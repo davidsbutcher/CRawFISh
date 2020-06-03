@@ -7,6 +7,7 @@
 #' @param tdReportName Name of the tdReport file.
 #' @param maxinjectcutoff Fraction of max injection time that should be used as cutoff for max injections.
 #' @param make_report Boolean value. Create an HTML report in the output directory?
+#' @param export_raw_info Boolean value. Export all info obtained from raw files?
 #' @return
 #' This function saves a table of summary data (.xlsx) and an html report for the relevant raw files to the specified output directory.
 #' @examples
@@ -27,7 +28,8 @@ crawfish <-
       tdReportName = NULL,
       outputDir = NULL,
       maxinjectcutoff = 0.99,
-      make_report = TRUE
+      make_report = TRUE,
+      export_raw_info = FALSE
    ) {
 
       # Assertions --------------------------------------------------------------
@@ -57,8 +59,8 @@ crawfish <-
       }
 
       assert_that(
-         is.dir(outputDir),
-         msg = "outputDir is not a recognized path"
+         is.dir(dirname(outputDir)),
+         msg = "outputDir parent is not a recognized path"
       )
 
       assert_that(
@@ -67,8 +69,6 @@ crawfish <-
          maxinjectcutoff <= 1,
          msg = "maxinjectcutoff should be between 0 and 1"
       )
-
-
 
       # Choose subfunction ------------------------------------------------------
 
@@ -91,6 +91,21 @@ crawfish <-
             )
 
       }
+
+      ## Save raw file info
+
+      if (export_raw_info == TRUE) {
+
+         save_raw_file_info(
+            rawFileInfo,
+            outputDir,
+            use_tdreport,
+            tdReportName
+         )
+
+      }
+
+      ## Generate summary of results
 
       rawFileInfoSum <-
          analyze_raw_file_info(rawFileInfo, maxinjectcutoff)

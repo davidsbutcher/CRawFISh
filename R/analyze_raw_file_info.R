@@ -14,6 +14,7 @@
 #' @importFrom stringr str_detect
 #' @importFrom stringr str_match
 #' @importFrom stringr str_remove
+#' @importFrom stringr str_extract
 #' @importFrom stringr fixed
 #' @importFrom dplyr group_by
 #' @importFrom dplyr ungroup
@@ -34,42 +35,19 @@ analyze_raw_file_info <-
 
       basicAnalysis <-
          rawFileInfo %>%
-         mutate(
-            MSOrder = case_when(
-               MSOrder == "Ms" ~ 1,
-               MSOrder == "Ms2" ~ 2,
-               MSOrder == "Ms3" ~ 3,
-               MSOrder == "Ms4" ~ 4
-            ) %>% as.integer
-         ) %>%
-         mutate(
-            polarity = if_else(
-               str_detect(ScanType, fixed("+")), "pos", "neg"
-            )
-         ) %>%
-         mutate(
-            CtrapFill = if_else(
-               str_detect(
-                  FTAnalyzerMessage, fixed("CTrap=")
-               ),
-               str_match(
-                  FTAnalyzerMessage, "\\d{1,2}"
-               ),
-               "1"
-            ) %>% as.integer
-         ) %>%
          group_by(filename, ScanSegment, ScanEvent, polarity, MSOrder, MassAnalyzer) %>%
          summarize(
             scanHeader = if_else(MSOrder == 1, ScanType, "N/A")[1],
             FTResolution = FTResolution[1],
             MicroScanCount = MicroScanCount[1],
             CtrapFill = CtrapFill[1],
+            meanUfill = mean(Ufill),
             APISourceCIDEnergy = APISourceCIDEnergy[1],
             CollisionEnergy = CollisionEnergy[1],
             MS2IsolationWidth = MS2IsolationWidth[1],
             averageScanTime = mean(ElapsedScanTimesec),
             stdDevScanTime = sd(ElapsedScanTimesec),
-            acquisitionCount = n(),
+            acquisitionCount = dplyr::n(),
             maxTIC = max(TIC),
             meanTIC = mean(TIC),
             stdDevTIC = sd(TIC),
