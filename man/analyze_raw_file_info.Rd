@@ -35,5 +35,4 @@ Save raw file info sum
 }
 \examples{
 Fix this later
-Fix this later
 }

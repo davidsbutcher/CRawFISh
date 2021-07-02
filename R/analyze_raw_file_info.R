@@ -6,8 +6,6 @@
 #' @param maxinjectcutoff Fraction of max injection time that should be used as cutoff for max injections.
 #' @return
 #' Dataframe containing analysis of raw file info.
-#' @examples
-#' Fix this later
 #' @importFrom magrittr %>%
 #' @importFrom fs dir_exists
 #' @importFrom fs dir_create

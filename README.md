@@ -58,13 +58,13 @@ the raw files in the tdReport must match the names of the files in the
 
 For all analyses, the following arguments can be specified:
 
-  - maxinjectcutoff: Fraction of maximum injection time that is used to
+-   maxinjectcutoff: Fraction of maximum injection time that is used to
     determine the cutoff for “max injects”. Defaults to 0.99.
 
-  - make\_report: Boolean value (TRUE or FALSE). Determines whether an
+-   make\_report: Boolean value (TRUE or FALSE). Determines whether an
     HTML report is generated in the `outputDir`. Defaults to TRUE.
 
-  - export\_raw\_info: Boolean value (TRUE or FALSE). Controls whether
+-   export\_raw\_info: Boolean value (TRUE or FALSE). Controls whether
     an output file is generated containing all extracted metadata
     without summarization. This file can be quite large. Defaults to
     FALSE.
@@ -83,4 +83,4 @@ data from raw files. rawDiag is licensed under [GNU GPL
 v3.0](https://www.gnu.org/licenses/gpl-3.0.en.html).
 
 All other components are written by David S. Butcher and available under
-CC BY-NC 4.0.
+an MIT license.

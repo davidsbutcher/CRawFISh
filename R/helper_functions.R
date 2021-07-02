@@ -46,7 +46,7 @@ read_tdreport_filenames <- function(tdreport) {
 
    if (is.null(safecon[["result"]]) == TRUE) {
 
-      stop("read_tdreport_protein could not connect to TDreport")
+      stop("read_tdreport_filenames could not connect to TDreport")
 
    } else {
 
